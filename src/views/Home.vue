@@ -1,24 +1,39 @@
 <template>
-  <div class="home">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
-    <h1>{{ a }}</h1>
+  <div class="content-container">
+    <template-list :list="testData"></template-list>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue"
-import HelloWorld from "@/components/HelloWorld.vue" // @ is an alias to /src
-
+import { computed, defineComponent } from "vue"
+import { useRouter } from "vue-router"
+import { useStore } from "vuex"
+import { GlobalDataProps } from "../store/index"
+import TemplateList from "../components/TemplateList.vue"
 export default defineComponent({
-  name: "Home",
   components: {
-    HelloWorld,
+    TemplateList,
   },
   setup() {
-    const a = ref<number>(1)
+    const store = useStore<GlobalDataProps>()
+    const testData = computed(() => store.state.templates.data)
     return {
-      a,
+      testData,
     }
   },
 })
 </script>
+
+<style>
+.page-title {
+  color: #fff;
+}
+.content-container {
+  background: #fff;
+  padding: 0 24px 24px 30px;
+  min-height: 85vh;
+  max-width: 1200px;
+  margin: 50px auto;
+  width: 100%;
+}
+</style>
