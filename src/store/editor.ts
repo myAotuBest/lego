@@ -43,6 +43,21 @@ const editor: Module<EditorProps, GlobalDataProps> = {
         removeComponent(state, id: string) {
             const newComponent = state.components.filter(item => item.id !== id)
             state.components = newComponent
+        },
+        updateComponent(state, { key, value }) {
+            const updatedComponent = state.components.find((component) => component.id === state.currentElement)
+            if (updatedComponent) {
+                updatedComponent.props[key as keyof TextComponentProps] = value
+            }
+        },
+        setActive(state, id: string) {
+            state.currentElement = id
+        },
+
+    },
+    getters: {
+        getCurrentElement(state) {
+            return state.components.find((component) => component.id === state.currentElement)
         }
     }
 }
