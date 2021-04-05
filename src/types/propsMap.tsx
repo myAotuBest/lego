@@ -1,5 +1,6 @@
 import { VNode } from 'vue'
 import { TextComponentProps } from './defaultProps'
+import fontFamilyOptions from './fontFamilyOptions'
 export interface PropToForm {
     component: string;
     subComponent?: string;
@@ -29,20 +30,6 @@ export type PropsToForms = {
     [P in keyof TextComponentProps]?: PropToForm
 }
 
-const fontFamilyArr = [
-    { text: '宋体', value: '"SimSun","STSong"' },
-    { text: '黑体', value: '"SimHei","STHeiti"' },
-    { text: '楷体', value: '"KaiTi","STKaiti"' },
-    { text: '仿宋', value: '"FangSong","STFangsong"' },
-]
-
-const fontFamilyOptions = fontFamilyArr.map(font => {
-    return {
-        value: font.value,
-        text: <span style={{ fontFamily: font.value }}>{font.text}</span> as VNode
-    }
-})
-
 export const mapPropsToForms: PropsToForms = {
     text: {
         text: '文本',
@@ -50,6 +37,10 @@ export const mapPropsToForms: PropsToForms = {
         value: "test",
         extraProps: { rows: 3 },
         afterTransform: (e: any) => e.target.value,
+    },
+    color: {
+        component: 'color-picker',
+        text: '字体颜色'
     },
     fontSize: {
         text: '字号',
@@ -63,6 +54,12 @@ export const mapPropsToForms: PropsToForms = {
         extraProps: { min: 0, max: 3, step: 0.1 },
         initalTransform: (v: string) => parseFloat(v),
         afterTransform: (e: number) => e.toString(),
+    },
+    opacity: {
+        text: '透明度',
+        component: 'a-slider',
+        initalTransform: (v: string) => parseFloat(v) * 100,
+        afterTransform: (v: string) => parseFloat((Number(v) / 100).toString()),
     },
     textAlign: {
         component: 'a-radio-group',

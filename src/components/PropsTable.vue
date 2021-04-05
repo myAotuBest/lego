@@ -26,11 +26,12 @@
   </div>
 </template>
 <script lang="ts">
-import { computed, defineComponent, PropType, VNode } from "vue"
+import { computed, defineComponent, PropType } from "vue"
 import { reduce } from "lodash-es"
 import { TextComponentProps } from "@/types/defaultProps"
-import { mapPropsToForms, FormProps } from "@/types/propsMap.tsx"
+import { mapPropsToForms, FormProps } from "@/types/propsMap"
 import RenderVnode from "./RenderVnode"
+import ColorPicker from "./ColorPicker.vue"
 
 export default defineComponent({
   props: {
@@ -42,6 +43,7 @@ export default defineComponent({
   emits: ["change"],
   components: {
     RenderVnode,
+    ColorPicker,
   },
   setup(props, context) {
     const finalProps = computed(() => {
@@ -64,7 +66,7 @@ export default defineComponent({
               eventName,
               value: initalTransform ? initalTransform(value) : value,
               events: {
-                [eventName]: (e: any) => {
+                [eventName]: (e: unknown) => {
                   context.emit("change", {
                     key,
                     value: afterTransform ? afterTransform(e) : e,

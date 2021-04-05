@@ -50,7 +50,7 @@
 <script lang="ts">
 import { computed, defineComponent } from "vue"
 import { useStore } from "vuex"
-import LText from "@/components/lText/lText.vue"
+import LText from "@/components/LText.vue"
 import ComponentsList from "@/components/ComponentsList.vue"
 import EditWrapper from "@/components/EditWrapper.vue"
 import PropsTable from "@/components/PropsTable.vue"

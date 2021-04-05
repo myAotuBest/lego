@@ -8,7 +8,8 @@ export const defaultTextTemplates = [
   },
   {
     text: '正文内容',
-    tag: 'p'
+    tag: 'p',
+    opacity: '0.5'
   },
   {
     text: '链接内容',

@@ -12,7 +12,7 @@
 </template>
 <script lang="ts">
 import { defineComponent } from "vue"
-import LText from "./lText/lText.vue"
+import LText from "./LText.vue"
 export default defineComponent({
   name: "components-list",
   props: {
